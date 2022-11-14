@@ -7,7 +7,11 @@
         let htmlString = '<ul>';
 
         for (let file of data) {
-            htmlString += `<li><a href="${file.path.replace("/apps", "")}">${file.name}</a></li>`;
+            let filePath = file.path;
+            console.log("original" + file.path);
+            filePath = file.path.replace("/apps", "");
+            console.log("new" + file.path);
+            htmlString += `<li><a href="${filePath}">${file.name}</a></li>`;
         }
 
         htmlString += '</ul>';
