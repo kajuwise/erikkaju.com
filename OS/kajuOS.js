@@ -143,13 +143,15 @@ function locateAndInstallApps() {
   storeOutput(Actor.BIOS, "Scanning /apps directory");
 
   $.ajax({
-    url: "/apps",
+    // url: "/apps",
+    url: "/erikkaju.com/apps", //hack for github pages
     success: function(data){
-      var locatedAppnames = $(data).find('a:contains(.kajuapp)');
-      nrFoundApps = locatedAppnames.length;
+      console.log(data);
+      var locatedAppNames = $(data).find('a:contains(.kajuapp)');
+      nrFoundApps = locatedAppNames.length;
       storeOutput(Actor.BIOS, "Located " + nrFoundApps + " apps", LINE_CLASS_APP_LOCATE);
 
-      locatedAppnames.each(function(){
+      locatedAppNames.each(function(){
         // will loop through
         var discoveredApp= $(this).attr("href");
         storeOutput(Actor.BIOS, "Installing " + discoveredApp, LINE_CLASS_APP_INSTALL, true);
