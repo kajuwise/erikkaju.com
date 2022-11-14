@@ -1,0 +1,32 @@
+kajuApp = {
+    "/supermario": function () {
+        output([
+            "            ___  ___       __   __                          ".replaceAll(" ", "&nbsp;"),
+            "|\\ | | |\\ |  |  |__  |\\ | |  \\ /  \\                         ".replaceAll(" ", "&nbsp;"),
+            "| \\| | | \\|  |  |___ | \\| |__/ \\__/                         ".replaceAll(" ", "&nbsp;"),
+            "                                                            ".replaceAll(" ", "&nbsp;"),
+            " ___      ___  ___  __  ___                    ___      ___ ".replaceAll(" ", "&nbsp;"),
+            "|__  |\\ |  |  |__  |__)  |   /\\  | |\\ |  |\\/| |__  |\\ |  |  ".replaceAll(" ", "&nbsp;"),
+            "|___ | \\|  |  |___ |  \\  |  /~~\\ | | \\|  |  | |___ | \\|  |  ".replaceAll(" ", "&nbsp;"),
+            "                                                            ".replaceAll(" ", "&nbsp;"),
+            " __       __  ___  ___                                      ".replaceAll(" ", "&nbsp;"),
+            "/__` \\ / /__`  |  |__   |\\/|                                ".replaceAll(" ", "&nbsp;"),
+            ".__/  |  .__/  |  |___  |  |                                ".replaceAll(" ", "&nbsp;"),
+            "",
+            "",
+            "LOADING NES 1983...",
+            "supermario.ee"
+        ]);
+
+        setTimeout(function() {
+            // var gameUrl = "https://supermario-game.com/fullscreen";
+            var gameUrl = "https://supermario.ee";
+            // window.location.replace(gameUrl);
+            // $("html").html("<iframe src='" + gameUrl + "' height='100%' width='100%' frameborder='0'>FATAL ERROR</iframe>");
+            $("html").html("<iframe class='NES-screen' src='" + gameUrl + "' frameBorder='0'\n" +
+                "              style='overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:100%;width:100%;position:absolute;top:0%;left:0px;right:0px;bottom:0px'\n" +
+                "              height='100%' width='100%'></iframe>");
+        }, 500);
+
+    }
+}

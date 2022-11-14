@@ -1,0 +1,17 @@
+kajuApp = {
+    "/investments": function() {
+
+        var print = [
+            "Supplierplus",
+            "Change Invest",
+            "Bolt",
+            "Apata",
+            "Wisedrive",
+            "Printify",
+            "DriveX",
+            ""
+        ];
+
+        output(print);
+    }
+}

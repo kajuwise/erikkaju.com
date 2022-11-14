@@ -1,0 +1,10 @@
+kajuApp =
+    {
+        "/cookies": function() {
+            output([document.cookie]);
+        },
+        "/cookies -accept": function () {
+            saveCookie("cookiesAccepted", true)
+            output(["Cookies accepted!"]);
+        }
+    }

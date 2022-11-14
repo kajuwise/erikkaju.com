@@ -1,0 +1,5 @@
+kajuApp = {
+    "/say": function(a) {
+        output([a]);
+    }
+}

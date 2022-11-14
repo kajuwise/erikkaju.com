@@ -1,0 +1,13 @@
+kajuApp = {
+    "/js": function(str) {
+        var print = [];
+        print.push("Run javascript");
+        try {
+            (new Function(str))();
+            print.push("Javascript code executed successfully");
+        } catch(err) {
+            print.push("Javascript code Error: " + err.message);
+        }
+        output(print);
+    }
+}

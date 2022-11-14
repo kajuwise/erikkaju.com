@@ -1,0 +1,14 @@
+kajuApp = {
+    "/contact": function() {
+
+        var print = [
+            "Contact Me:",
+            "",
+            "Twitter: <span>@erikkaju</span>",
+            "Instagram: <span>@kajuwise</span>",
+            "Youtube: <span>@GWise</span>"
+        ];
+
+        output(print);
+    }
+}

@@ -1,0 +1,6 @@
+kajuApp = {
+    "/clear": function() {
+        clearConsole();
+        clearHint();
+    }
+}

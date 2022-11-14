@@ -1,0 +1,6 @@
+kajuApp = {
+    "/alert": function(a) {
+        alert(a);
+        output([]);
+    }
+}

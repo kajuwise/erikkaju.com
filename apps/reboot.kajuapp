@@ -1,0 +1,26 @@
+kajuApp = {
+    "/reboot": function () {
+        storeOutput(Actor.SYSTEM, "Going to sleep!");
+        hideConsolePromptBox();
+
+        setTimeout(function () {
+            clearConsole();
+        }, 950);
+
+        setTimeout(function () {
+            storeOutput(Actor.BIOS, "ABORT MISSION");
+        }, 1150);
+
+        setTimeout(function () {
+            storeOutput(Actor.BIOS, "It is very <span>beautiful</span> over there!".toLocaleUpperCase());
+        }, 1550);
+
+        setTimeout(function () {
+            window.location.replace(location.href);
+        }, 1750);
+
+        setTimeout(function () {
+            showConsolePromptBox();
+        }, 2000);
+    }
+}

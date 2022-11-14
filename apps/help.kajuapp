@@ -1,0 +1,9 @@
+kajuApp = {
+    "/help": function() {
+
+        var print = ["Commands:", ""];
+        print = $.merge(print, Object.keys(installedApps));
+
+        output(print);
+    }
+}

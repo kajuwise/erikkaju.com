@@ -1,0 +1,5 @@
+kajuApp = {
+    "/erase": function() {
+        removeLastLines();
+    }
+}

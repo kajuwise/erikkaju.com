@@ -1,0 +1,12 @@
+kajuApp = {
+    "/stack": function() {
+
+        var print = [
+            "<span>jQuery 3.6.0</span> - to piss you hipsters off",
+            "<span>SpringBoot 2.7</span> - other backend frameworks don't exist. (c) fintech devs ",
+            "<span>SurrealDB v1.0.0-beta.</span> - to overkill, or not to overkill. That is the question."
+        ];
+
+        output(print);
+    }
+}
