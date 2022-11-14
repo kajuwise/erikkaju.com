@@ -144,7 +144,7 @@ function locateAndInstallApps() {
 
   $.ajax({
     // url: "/apps",
-    url: "/erikkaju.com/apps", //hack for github pages
+    url: "https://github.com/kajuwise/erikkaju.com/tree/master/apps", //hack for github pages
     success: function(data){
       console.log(data);
       var locatedAppNames = $(data).find('a:contains(.kajuapp)');
@@ -155,7 +155,9 @@ function locateAndInstallApps() {
         // will loop through
         var discoveredApp= $(this).attr("href");
         storeOutput(Actor.BIOS, "Installing " + discoveredApp, LINE_CLASS_APP_INSTALL, true);
-        $.getScript( "/apps/" + discoveredApp, function( data, textStatus, jqxhr ) {
+        // let appsRoot = "/apps/";
+        let appsRoot = "https://raw.githubusercontent.com/kajuwise/erikkaju.com/master/apps/"; //hack for github pages
+        $.getScript( appsRoot + discoveredApp, function( data, textStatus, jqxhr ) {
           Object.assign(installedApps, kajuApp);
           Object.entries(installedApps).forEach(e => autoCompleteCommands.push(e[0]));
         });
