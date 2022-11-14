@@ -1,0 +1,148 @@
+@font-face {
+  font-family: "Kaju terminal";
+  /*src: url('font/SyneMono-Regular.ttf') format("truetype");*/
+  /*src: url('font/Modenine-2OPd.ttf') format("truetype");*/
+  /*src: url('font/D3DigibitmapismTypeA-owea.ttf') format("truetype");*/
+
+  /*src: url('font/VT323-Regular.ttf') format("truetype");*/
+  /*src: url('font/Px437_Copam_BIOS.ttf') format("truetype");*/
+  /*src: url('font/Px437_Acer710_Mono.ttf') format("truetype");*/
+  /*src: url('font/Px437_ATI_8x16.ttf') format("truetype");*/
+
+  /*src: url('font/3270-Regular.ttf') format("truetype");*/
+  src: url('font/clacon2.ttf') format("truetype");
+
+}
+
+@font-face {
+  font-family: "BIOS";
+  src: url('font/Glass_TTY_VT220.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: "bootloader";
+  /*src: url('font/PxPlus_IBM_VGA_9x8-2x.ttf') format("truetype");*/ /* massive */
+  src: url('font/PxPlus_IBM_VGA_8x16-2x.ttf') format("truetype");
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  background-color: black;
+  background:black;
+  color: black;
+  padding: 0.5em 1em;
+  /*-webkit-font-smoothing: antialiased;*/
+}
+
+.console {
+  position: relative;
+  color: #00ff00;
+  max-width: 100%;
+  margin: 0.5em;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 0.5em;
+  box-shadow: 0 0.75em 3em rgba(50, 50, 50, 0.5);
+  z-index: 100;
+}
+
+.console-input {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: #00ff00;
+  margin: 0;
+  padding: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.console-label,
+.output-cmd-pre,
+.output-server-pre,
+.output-text-pre {
+  width: 4em;
+  margin-right: 0.5em;
+  display: block;
+  vertical-align: bottom;
+  font-weight: 800 !important;
+  text-align: right;
+  float: left;
+  clear: left;
+}
+
+.console-label,
+.output-cmd-pre {
+  color: rgba(0, 255, 0, 0.55);
+}
+.output-server-pre {
+  color: red;
+}
+.output-text-pre {
+  color: rgba(0, 225, 255, 0.37);
+  font-weight: 600 !important;
+}
+
+.console-input,
+.output-server,
+.output-text,
+.output-cmd {
+  min-width: calc(100% - 4.5em);
+  max-width: calc(100% - 4.5em);
+  margin-left: 4.5em;
+  display: block;
+}
+
+.output-server {
+  color: white;
+}
+
+.console-inner {
+  padding: 0.3em 1.1em;
+}
+
+.terminal-prompt-box {
+  position: relative;
+  max-width: 100%;
+}
+
+span,
+input {
+  font-family: 'Kaju terminal' !important;
+  font-weight: 300 !important;
+  font-size: 25px;
+}
+
+.output-text,
+.output-server,
+.output-cmd {
+  display: block;
+}
+
+#outputs span {
+  opacity: 0.85;
+}
+
+#outputs span span,
+#outputs span a {
+  color: yellow;
+  font-weight: 900 !important;;
+}
+
+.console-inner .output-text#ready {
+  color: #3df5b8;
+  font-style: italic;
+  opacity: 0.75;
+}
+
+* {
+  vertical-align: middle;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
