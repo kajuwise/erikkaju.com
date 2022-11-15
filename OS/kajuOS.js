@@ -143,8 +143,7 @@ function locateAndInstallApps() {
   storeOutput(Actor.BIOS, "Scanning /apps directory");
 
   $.ajax({
-    // url: "/apps",
-    url: "https://github.com/kajuwise/erikkaju.com/tree/master/apps", //hack for github pages
+    url: "/apps",
     success: function(data){
       console.log(data);
       var locatedAppNames = $(data).find('a:contains(.kajuapp)');
@@ -155,8 +154,7 @@ function locateAndInstallApps() {
         // will loop through
         var discoveredApp= $(this).attr("href");
         storeOutput(Actor.BIOS, "Installing " + discoveredApp, LINE_CLASS_APP_INSTALL, true);
-        // let appsRoot = "/apps/";
-        let appsRoot = "https://raw.githubusercontent.com/kajuwise/erikkaju.com/master/apps/"; //hack for github pages
+        let appsRoot = "/apps/";
         $.getScript( appsRoot + discoveredApp, function( data, textStatus, jqxhr ) {
           Object.assign(installedApps, kajuApp);
           Object.entries(installedApps).forEach(e => autoCompleteCommands.push(e[0]));
