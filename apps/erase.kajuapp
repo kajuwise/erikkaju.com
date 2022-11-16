@@ -1,5 +1,6 @@
 kajuApp = {
     "/erase": function() {
         removeLastLines();
+        clearHint();
     }
 }
