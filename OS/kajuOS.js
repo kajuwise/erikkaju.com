@@ -21,6 +21,8 @@ $("html").click(function() {
 const bootloaderLineStyle = "font-family: bootloader !important;";
 const biosLineStyle = "font-family: bios !important;";
 
+let DEBUG = false;
+
 class Actor {
   static USER = new Actor('User >', 'output-cmd-pre', 'output-text');
   static SYSTEM = new Actor('System >', 'output-text-pre', 'output-text');
@@ -48,10 +50,63 @@ class Cookie {
   static LAST_LOC = "lastLoc";
   static LAST_COLO = "lastColo";
   static LAST_DATETIME = "lastDateTime";
+  static CMD_MEMORY = 'commandMemory';
+}
+
+
+class CommandMemory {
+  static commands  = [];
+  static index = 0;
+
+  static validateAndSave(command) {
+    this.resetIndex();
+    if (!isNullOrWhitespace(command) && command != this.commands.at(this.index -1)) {
+      this.commands.push(command);
+      this.index ++;
+      saveCookie(Cookie.CMD_MEMORY, JSON.stringify(this.commands))
+    }
+  }
+
+  static getPrevious() {
+    if(this.index > 0) {
+      this.index--;
+    }
+
+    return this.commands.at(this.index);
+  }
+
+  static getNext() {
+    if (this.index < this.commands.length) {
+      return this.commands.at(++this.index);
+    }
+  }
+
+
+  static resetIndex() {
+    this.index = this.commands.length;
+  }
+
+  static restoreFromCookie() {
+    let commandMemoryCookie = getCookie(Cookie.CMD_MEMORY);
+
+    if (commandMemoryCookie) {
+      this.commands = JSON.parse(commandMemoryCookie);
+      this.resetIndex();
+    }
+  }
+}
+
+CommandMemory.restoreFromCookie();
+
+function log(message) {
+  if (DEBUG) {
+    console.log(message);
+  }
 }
 
 // Output to Console
 function output(print, skipInput) {
+
   if (!skipInput) {
     var currentLineValue = LAST_FULL_COMMAND_AND_DATA;
     if (currentLineValue=="") {currentLineValue="<span style='opacity:0;'>...</span>";} //todo is needed?
@@ -121,10 +176,6 @@ function clearHint() {
 
 var installedApps = {};
 
-function installApp (app) {
-  console.log(app);
-}
-
 let LINE_CLASS_APP_LOCATE = "kajuappslocate";
 let LINE_CLASS_APP_INSTALL = "kajuappsinstalls";
 let nrFoundApps = 0;
@@ -133,7 +184,6 @@ function locateAndInstallApps() {
 
   var autoCompleteConf = {
     after: "",
-    arrowKeys: false,
     caseSensitive: false,
     hint: "placeholder",
     minLength: 2
@@ -145,7 +195,7 @@ function locateAndInstallApps() {
   $.ajax({
     url: "/apps",
     success: function(data){
-      console.log(data);
+      log(data);
       var locatedAppNames = $(data).find('a:contains(.kajuapp)');
       nrFoundApps = locatedAppNames.length;
       storeOutput(Actor.BIOS, "Located " + nrFoundApps + " apps", LINE_CLASS_APP_LOCATE);
@@ -279,7 +329,7 @@ function pickLongestStringInArray(arrayOfStrings) {
 }
 
 // Get User Command
-$('.console-input').on('keypress', function(event) {
+$('.console-input').on('keydown', function(event) {
   if (event.which === 13) {
     var str = $(this).val();
     var data = str.split(' '); data.shift(); data = data.join(' ');
@@ -287,6 +337,7 @@ $('.console-input').on('keypress', function(event) {
 
     LAST_FULL_COMMAND_AND_DATA = pickLongestStringInArray([str, $('.hint').val()]);
     LAST_COMMAND_ONLY = pickLongestStringInArray([cmd, $('.hint').val()]);
+    CommandMemory.validateAndSave(LAST_FULL_COMMAND_AND_DATA);
 
     if (typeof installedApps[LAST_COMMAND_ONLY] == 'function') {
       if(installedApps[LAST_COMMAND_ONLY].length > 0) {
@@ -298,6 +349,10 @@ $('.console-input').on('keypress', function(event) {
       output(["Command not found: '" + cmd + "'", "Use '/help' for list of commands."]);
     }
     $(this).val("");
+  } else if (event.which === 38) {
+    $(this).val(CommandMemory.getPrevious())
+  } else if (event.which === 40) {
+    $(this).val(CommandMemory.getNext())
   }
 });
 
