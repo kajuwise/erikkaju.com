@@ -1,15 +1,41 @@
 var ver = "5";
 $('#ver').html(ver);
 hideConsolePromptBox();
-// Force Lowercase Input
+
 $('.console-input').keyup(function() {
   // this.value = this.value.toLowerCase();
 });
 
-// Force Cursor to End
 $('.console-input').keydown(function() {
-  this.value = this.value;
+  this.value = this.value; //todo does it work?
 });
+
+function getConsoleInputElement() {
+  return document.getElementById("consoleInput")
+}
+
+function moveConsoleInputCursorToEnd() {
+  setTimeout(function() {
+    moveInputCursorToEnd(getConsoleInputElement());
+  }, 1);
+}
+
+function moveInputCursorToEnd(theInput) {
+  let len = theInput.value.length;
+
+  if (theInput.setSelectionRange) {
+    theInput.focus();
+    theInput.setSelectionRange(len, len);
+    console.log('here');
+  } else if (theInput.createTextRange) {
+    var t = theInput.createTextRange();
+    t.collapse(true);
+    t.moveEnd('character', len);
+    t.moveStart('character', len);
+    t.select();
+  }
+}
+
 $('.console-input').click(function() {
   this.value = this.value;
 });
@@ -350,9 +376,12 @@ $('.console-input').on('keydown', function(event) {
     }
     $(this).val("");
   } else if (event.which === 38) {
-    $(this).val(CommandMemory.getPrevious())
+    $(this).val(CommandMemory.getPrevious());
+    moveConsoleInputCursorToEnd();
+    clearHint();
   } else if (event.which === 40) {
-    $(this).val(CommandMemory.getNext())
+    $(this).val(CommandMemory.getNext());
+    clearHint();
   }
 });
 
