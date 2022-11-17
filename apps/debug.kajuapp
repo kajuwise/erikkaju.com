@@ -1,0 +1,22 @@
+const ON = 'on'
+const OFF = 'off'
+
+kajuApp = {
+    "/debug": function(onOff) {
+        onOff = onOff.toLowerCase();
+        if (onOff == ON || onOff == '') {
+            DEBUG = true;
+            let msg = 'Browser console logging enabled!';
+            console.log(msg);
+            output([msg]);
+        } else if (onOff == OFF) {
+            DEBUG = false;
+            let msg = 'Browser console logging disabled!';
+            console.log(msg);
+            output([msg]);
+        } else {
+            let msg = `Unsupported parameter: '${onOff}'. Use '${ON}' to enable debugging and '${OFF}' to disable.`;
+            output([msg]);
+        }
+    }
+}
