@@ -1,0 +1,21 @@
+kajuApp = {
+    "/random": function() {
+        let images = [
+            '3-Gustave-Courbet-Le-Desperere-1.jpeg',
+            '4-Egon-Schiele-Self-Portrait-Wit.jpeg',
+            '5-M.-Escher-–-Hand-With-Reflecti.jpg',
+            '7-David-Hockney-–-Self-Portrait.jpeg',
+            '8-Lucian-Freud-–-Reflection-With.jpeg',
+            '10-Cindy-Sherman-–-Untitled-Film.jpeg',
+            'Famous-Art-Portrait-Paintings.jpeg',
+            'Famous-Portrait-Artists-Painting.jpeg',
+            'Michael_Andrews_-_The_Colony_Roo.jpeg',
+            'Mona-Lisa.jpeg',
+            'Most-Famous-Portrait-Paintings.jpeg',
+            'The-Two-Fridas-Frida-Kahlo-detai.jpeg'
+        ]
+
+        let i = Math.floor(Math.random() * images.length) + 1;
+        output([image('/apps/random.kajuapp/images/' + images.at(i))])
+    }
+}
