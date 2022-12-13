@@ -26,7 +26,6 @@ function moveInputCursorToEnd(theInput) {
   if (theInput.setSelectionRange) {
     theInput.focus();
     theInput.setSelectionRange(len, len);
-    console.log('here');
   } else if (theInput.createTextRange) {
     var t = theInput.createTextRange();
     t.collapse(true);
@@ -288,6 +287,10 @@ function getCookie(key) {
   return Cookies.get(key);
 }
 
+function clearCookies() {
+  Cookies.remove();
+}
+
 function welcomeScreen(userIp, userAgent, location, city) {
 
   removeLastLines();
@@ -354,6 +357,17 @@ function pickLongestStringInArray(arrayOfStrings) {
   );
 }
 
+var analyticsEvent, analytics;
+async function installAnalyticsDriver() {
+  var {gaEvent, gaAnalytics} = await import('../driver/firebase.js');
+  analyticsEvent = gaEvent;
+  analytics = gaAnalytics;
+}
+
+function logEvent(eventName, eventParameters) {
+  analyticsEvent(analytics, eventName, eventParameters);
+}
+
 // Get User Command
 $('.console-input').on('keydown', function(event) {
   if (event.which === 13) {
@@ -363,10 +377,18 @@ $('.console-input').on('keydown', function(event) {
 
     LAST_FULL_COMMAND_AND_DATA = pickLongestStringInArray([str, $('.hint').val()]);
     LAST_COMMAND_ONLY = pickLongestStringInArray([cmd, $('.hint').val()]);
-    CommandMemory.validateAndSave(LAST_FULL_COMMAND_AND_DATA);
+    CommandMemory.validateAndSave(data);
+
+    logEvent('user_run_command', {full_command: LAST_FULL_COMMAND_AND_DATA});
+
+    if (LAST_FULL_COMMAND_AND_DATA.startsWith("sudo ")) {
+      output([`Sorry, user is not allowed to execute '${LAST_FULL_COMMAND_AND_DATA.replace("sudo ", '')}' as root`]);
+      return;
+    }
+
 
     if (typeof installedApps[LAST_COMMAND_ONLY] == 'function') {
-      if(installedApps[LAST_COMMAND_ONLY].length > 0) {
+      if (installedApps[LAST_COMMAND_ONLY].length > 0) {
         installedApps[LAST_COMMAND_ONLY](data);
       } else {
         installedApps[LAST_COMMAND_ONLY]();
@@ -409,6 +431,10 @@ function decideIfShowAutocompleteHint() {
   }
 }
 
+function image(path) {
+  return `<img src="${path}">`
+}
+
 let LINE_CLASS_PROGRESSBAR = "progressbar";
 
 $(document).ready(function(){
@@ -421,6 +447,10 @@ $(document).ready(function(){
   storeOutput(Actor.BIOS, '## Booting erikkaju.com at 0x' + bootId);
   storeOutput(Actor.BIOS, '0%', LINE_CLASS_PROGRESSBAR);
   locateAndInstallApps();
+  installAnalyticsDriver().then((value) => {
+    storeOutput(Actor.BIOS, "Installed analytics driver");
+  });
+
   for (let l = 0; l < 102; l++) {
 
     var latestTimeout = l*4;
@@ -450,7 +480,6 @@ $(document).ready(function(){
     removeLastLines(7);
     storeOutput(Actor.BIOS_INVISIBLE, "");
     $.get('https://www.cloudflare.com/cdn-cgi/trace', function(data) {
-      //output(data.replace(/ /g, '&nbsp;').split("\n"));
       data = data.trim().split('\n').reduce(function(obj, pair) {
         pair = pair.split('=');
         return obj[pair[0]] = pair[1], obj;
@@ -464,7 +493,6 @@ $(document).ready(function(){
       saveCookie(Cookie.LAST_LOC, data.loc);
       saveCookie(Cookie.LAST_COLO, data.colo);
       saveCookie(Cookie.LAST_DATETIME, new Date().toUTCString())
-
     }
     );
   }, latestTimeout + 200);
