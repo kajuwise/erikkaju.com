@@ -1,0 +1,29 @@
+const ACCEPT = ['-accept', '-a', 'accept', 'a'];
+const CLEAR = ['-clear', '-c', 'clear', 'c'];
+
+kajuApp =
+    {
+        "/cookies": function (argument) {
+            argument = argument.toLowerCase();
+            if (isNullOrWhitespace(argument)) {
+                output([document.cookie]);
+            } else if (ACCEPT.includes(argument)) {
+                saveCookie("cookiesAccepted", true)
+                output(["Cookies accepted!"]);
+            } else if (CLEAR.includes(argument)) {
+                clearCookies()
+                output(["Cookies cleared!"]);
+            } else {
+                output([
+                    `Unsupported argument '${argument}' for /cookies.`,
+                    `To accept, use ${ACCEPT.toString()}.`,
+                    `To clear, use ${CLEAR.toString()}`,
+                    `To view use just /cookies`])
+            }
+        }
+        ,
+        "/cookies -accept": function() {},
+        "/cookies -clear": function() {}
+
+    }
+
