@@ -514,7 +514,6 @@ function tags(...tags) {
   };
 
   tagList += "</span>";
-  console.log(tagList);
   return tagList;
 }
 
@@ -528,4 +527,27 @@ function argHint(...arguments) {
 
   argumentHints += "</span>";
   return argumentHints;
+}
+
+function simulateCommand(command) {
+  setTimeout(function(){
+    hideInputPlaceholder();
+    getConsoleInputElement().style = 'color: black; background-color: #00ff00;';
+    getConsoleInputElement().value = command;
+  }, 300);
+
+  setTimeout(function(){
+    const ke = new KeyboardEvent('keydown', { bubbles: true, cancelable: true, keyCode: 13 });
+    getConsoleInputElement().dispatchEvent(ke);
+    getConsoleInputElement().style = "";
+    restoreInputPlaceholder();
+  }, 600);
+}
+
+function hideInputPlaceholder() {
+  getConsoleInputElement().placeholder = "";
+}
+
+function restoreInputPlaceholder() {
+  getConsoleInputElement().placeholder = "Type command...";
 }
