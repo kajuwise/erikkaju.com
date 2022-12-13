@@ -315,7 +315,7 @@ function welcomeScreen(userIp, userAgent, location, city) {
   }
 
   var welcome = [
-    "<span>Kaju Geek Web OS</span> [Version 0.1337.420] 1990-" + getCurrentYear(),
+    `${highlight('Kaju Geek Web OS')} [Version 0.1337.420] 1990-` + getCurrentYear(),
     "",
     "Welcome User @ " + userIp + " [" + city + ", " + location + "]",
     userAgent,
@@ -499,3 +499,33 @@ $(document).ready(function(){
   }, 700);
 });
 
+function highlight(string) {
+  let highlightedString = "<span class='highlight'>"
+  highlightedString += string;
+  return highlightedString + "</span>";
+}
+
+function tags(...tags) {
+  if (tags.length == 0) return "";
+
+  let tagList = "<span class='tags'>";
+  for (const tag of tags) {
+    tagList += ` #${tag}`;
+  };
+
+  tagList += "</span>";
+  console.log(tagList);
+  return tagList;
+}
+
+function argHint(...arguments) {
+  if (arguments.length == 0) return "";
+
+  let argumentHints = "<span class='argumentHint'>";
+  for (const argument of arguments) {
+    argumentHints += ` -${argument}`;
+  };
+
+  argumentHints += "</span>";
+  return argumentHints;
+}

@@ -127,10 +127,16 @@ input {
   opacity: 0.85;
 }
 
-#outputs span span,
-#outputs span a {
+.argumentHint {
+  color: darkolivegreen !important;
+}
+
+.tags {
+  color: orange !important;
+}
+
+.highlight {
   color: yellow;
-  font-weight: 900 !important;;
 }
 
 .console-inner .output-text#ready {

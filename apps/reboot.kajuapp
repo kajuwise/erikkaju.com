@@ -12,7 +12,7 @@ kajuApp = {
         }, 1150);
 
         setTimeout(function () {
-            storeOutput(Actor.BIOS, "It is very <span>beautiful</span> over there!".toLocaleUpperCase());
+            storeOutput(Actor.BIOS, `It is very ${highlight('beautiful')} over there!`.toLocaleUpperCase());
         }, 1550);
 
         setTimeout(function () {
