@@ -1,0 +1,143 @@
+var PATH_PROJECTS = "/projects";
+kajuApp = {
+    "/projects": function(argument) {
+
+        let ARG_VISA = ['-visa', '-v'];
+        let ARG_STRIPE = ['-stripe', '-s'];
+        let ARG_WISECARD = ['-wisecard'];
+        let ARG_WP = ['-wiseplatform', '-wp'];
+        let ARG_FFF = ['-fff'];
+        let ARG_EURO2 = ['-euro2'];
+        let ARG_ROLLERBOARD = ['-rollerboard', '-rb']
+        let ARG_BOTMASTER = ['-botmaster', '-b']
+        let ARG_NEVE = ['-neve', '-n']
+        let ARG_G55 = ['-g55', '-g']
+        let ARG_GOLF1987 = ['-golf1987']
+        let ARG_GOLF1990 = ['-golf1990']
+        let ARG_BMW2002 = ['-bmw2002']
+        let ARG_SPRINTER = ['-sprinter']
+
+        if (ARG_VISA.includes(argument)) {
+            output(["Built special project with Visa"]);
+            return;
+        } else if (ARG_STRIPE.includes(argument)) {
+            output(["Built special project with Stripe"]);
+            return;
+        } else if (ARG_WISECARD.includes(argument)) {
+            output(["Built special card"]);
+            return;
+        } else if (ARG_WP.includes(argument)) {
+            output(["Built special API"]);
+            return;
+        } else if (ARG_FFF.includes(argument)) {
+            output(["Special community"]);
+            return;
+        } else if (ARG_EURO2.includes(argument)) {
+            output(["Built stablecoin"]);
+            return;
+        } else if (ARG_ROLLERBOARD.includes(argument)) {
+            output(["Rollerboard"]);
+            return;
+        } else if (ARG_BOTMASTER.includes(argument)) {
+            output(["Robot framework"]);
+            return;
+        } else if (ARG_NEVE.includes(argument)) {
+            output(["Great robot"]);
+            return;
+        } else if (ARG_G55.includes(argument)) {
+            output(["G wagonn"]);
+            return;
+        } else if (ARG_GOLF1987.includes(argument)) {
+            output(["Red golf"]);
+            return;
+        } else if (ARG_GOLF1990.includes(argument)) {
+            output(["Brown golf"]);
+            return;
+        } else if (ARG_BMW2002.includes(argument)) {
+            output(["White beauty"]);
+            return;
+        } else if (ARG_SPRINTER.includes(argument)) {
+            output(["House on wheels"]);
+            return;
+        }
+
+        var print = [
+            `Some of memorable projects of past years`,
+            "",
+            `Professional:`,
+            new ClickableCommandListItem(PATH_PROJECTS, ARG_VISA)
+                .setTitle('Visa Global Connect')
+                .setText('World’s first 100% cloud based payment card issuance. 2020')
+                .setTags(['visa', 'wise', 'banking', 'paymentcards'])
+                .build(),
+            new ClickableCommandListItem(PATH_PROJECTS, ARG_STRIPE)
+                .setTitle('Stripe Delegated Auth')
+                .setText('World\'s first card issuer to replace traditional 3DS with delegated auth. 2022')
+                .setTags(['stripe', 'wise', 'security'])
+                .build(),
+            new ClickableCommandListItem(PATH_PROJECTS, ARG_WISECARD)
+                .setTitle('Wise Card')
+                .setText('Millions of shiny green cards used by consumers and businesses around the world. 2017-2022')
+                .setTags(['wise', 'paymentcards'])
+                .build(),
+            new ClickableCommandListItem(PATH_PROJECTS, ARG_WP)
+                .setTitle('Wise Platform')
+                .setText('Revolutionary global financial APIs. Used by Google, Stripe, Deel, N26, Monzo, etc. 2021-2022')
+                .setTags(['wise', 'api', 'b2b'])
+                .build(),
+            ``,
+            `Personal:`,
+            new ClickableCommandListItem(PATH_PROJECTS, ARG_FFF)
+                .setTitle('Fund Fellow Founders')
+                .setText('Community of 200 founders and tech executives angel investing. I’m first member and advisor. 2022')
+                .setTags(['vc', 'investing'])
+                .build(),
+            new ClickableCommandListItem(PATH_PROJECTS, ARG_EURO2)
+                .setTitle('Euro 2.0')
+                .setText('Stablecoin for central banks. 2016-2017')
+                .setTags(['opensource', 'cryptocurrency'])
+                .build(),
+            new ClickableCommandListItem(PATH_PROJECTS, ARG_ROLLERBOARD)
+                .setTitle('Rollerboard')
+                .setText('Year-round big-air snowboard trainer for Estonian national team. 2018')
+                .setTags(['mechanicalengineering', 'sporttech'])
+                .build(),
+
+            new ClickableCommandListItem(PATH_PROJECTS, ARG_BOTMASTER)
+                .setTitle('Botmaster')
+                .setText('C/C++ framework used by many award-winning competitive robots. 2011-2019')
+                .setTags(['robotics', 'opensource'])
+                .build(),
+            new ClickableCommandListItem(PATH_PROJECTS, ARG_NEVE)
+                .setTitle('Robot "Neve"')
+                .setText('Prize winning autonomous robot competing in robot soccer and basketball. 2012-2019')
+                .setTags(['robotics', 'opensource'])
+                .build(),
+            "",
+            `Hobby and race cars:`,
+            new ClickableCommandListItem(PATH_PROJECTS, ARG_G55)
+                .setTitle('Mercedes G55 AMG')
+                .setText('Modified 500HP G Wagon')
+                .build(),
+            new ClickableCommandListItem(PATH_PROJECTS, ARG_GOLF1987)
+                .setTitle('Golf Mk2 GTI 1987')
+                .setText('Time attack circuit race car.')
+                .build(),
+            new ClickableCommandListItem(PATH_PROJECTS, ARG_GOLF1990)
+                .setTitle('4x4 Golf Mk2 Turbo 1990')
+                .setText('Turbocharged all-wheel drive golf for (ice)track use.')
+                .build(),
+            new ClickableCommandListItem(PATH_PROJECTS, ARG_BMW2002)
+                .setTitle('BMW 2002 Turbo 1971')
+                .setText('Iconic bimmer that turned BMW into a sporty car brand.')
+                .build(),
+            new ClickableCommandListItem(PATH_PROJECTS, ARG_SPRINTER)
+                .setTitle('Mercedes Sprinter')
+                .setText('4x4 Home on wheels.')
+                .build(),
+            ""
+        ];
+
+        output(print);
+    }
+}

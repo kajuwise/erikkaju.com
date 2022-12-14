@@ -377,7 +377,7 @@ $('.console-input').on('keydown', function(event) {
 
     LAST_FULL_COMMAND_AND_DATA = pickLongestStringInArray([str, $('.hint').val()]);
     LAST_COMMAND_ONLY = pickLongestStringInArray([cmd, $('.hint').val()]);
-    CommandMemory.validateAndSave(data);
+    CommandMemory.validateAndSave(LAST_FULL_COMMAND_AND_DATA);
 
     logEvent('user_run_command', {full_command: LAST_FULL_COMMAND_AND_DATA});
 
@@ -505,8 +505,14 @@ function highlight(string) {
   return highlightedString + "</span>";
 }
 
-function tags(...tags) {
-  if (tags.length == 0) return "";
+function clickableCommand(string, command) {
+  let highlightedString = "<a href='javascript: simulateCommand(`" + command + "`)' class='highlight'>";
+  highlightedString += string;
+  return highlightedString + `</a>`;
+}
+
+function tags(tags) {
+  if (tags === undefined || tags.length == 0) return "";
 
   let tagList = "<span class='tags'>";
   for (const tag of tags) {
@@ -517,12 +523,12 @@ function tags(...tags) {
   return tagList;
 }
 
-function argHint(...arguments) {
+function argHint(arguments) {
   if (arguments.length == 0) return "";
 
   let argumentHints = "<span class='argumentHint'>";
   for (const argument of arguments) {
-    argumentHints += ` -${argument}`;
+    argumentHints += ` ${argument}`;
   };
 
   argumentHints += "</span>";
@@ -530,18 +536,18 @@ function argHint(...arguments) {
 }
 
 function simulateCommand(command) {
-  setTimeout(function(){
     hideInputPlaceholder();
-    getConsoleInputElement().style = 'color: black; background-color: #00ff00;';
+    getConsoleInputElement().style.display = "none";
     getConsoleInputElement().value = command;
-  }, 300);
+    getConsoleInputElement().style = "opacity: 1; color: black; background-color: #00ff00";
+    getConsoleInputElement().animate({opacity: 0}, 450)
 
   setTimeout(function(){
-    const ke = new KeyboardEvent('keydown', { bubbles: true, cancelable: true, keyCode: 13 });
-    getConsoleInputElement().dispatchEvent(ke);
+    const keyboardEvent = new KeyboardEvent('keydown', { bubbles: true, cancelable: true, keyCode: 13 });
+    getConsoleInputElement().dispatchEvent(keyboardEvent);
     getConsoleInputElement().style = "";
     restoreInputPlaceholder();
-  }, 600);
+  }, 400);
 }
 
 function hideInputPlaceholder() {
