@@ -15,7 +15,10 @@ kajuApp = {
             'The-Two-Fridas-Frida-Kahlo-detai.jpeg'
         ]
 
-        let i = Math.floor(Math.random() * images.length) + 1;
-        output([image('/apps/random.kajuapp/images/' + images.at(i))])
+        let i = Math.floor(Math.random() * images.length);
+        let imagePath = '/apps/random.kajuapp/images/' + images.at(i);
+        console.log(i);
+        console.log(imagePath);
+        output([image(imagePath)])
     }
 }
