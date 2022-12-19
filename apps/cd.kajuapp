@@ -1,0 +1,12 @@
+app = new KajuAppContainer("cd")
+    .main(function (args) {
+        if (args != undefined && args.length > 0) {
+            if (ls().includes(args)) {
+                output([`cd: not a directory: ${args}`])
+                return;
+            }
+            output([`cd: no such file or directory: ${args}`])
+        } else {
+            output("");
+        }
+    });

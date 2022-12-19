@@ -1,0 +1,10 @@
+app = new KajuAppContainer("ls")
+    .ofType(APP_TYPE.SYSTEM)
+    .helpMessage("list computer files and directories.")
+    .main(function (args) {
+        let out = ['~ %'];
+        out = out.concat(ls());
+        output(out);
+    });
+
+
