@@ -20,6 +20,10 @@ class ClickableCommandListItem {
     }
 
     build() {
-        return `• ${clickableCommand(this.title, this.command + ' ' + this.arguments.at(0) )} ${this.text}${tags(this.tags)} ${argHint(this.arguments)}`;
+        let command = this.command;
+        if (this.arguments != undefined && this.arguments.length > 0) {
+            command += (' ' + this.arguments.at(0));
+        }
+        return `• ${clickableCommand(this.title, command )} ${this.text}${tags(this.tags)} ${argHint(this.arguments)}`;
     }
 }
