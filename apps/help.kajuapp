@@ -3,9 +3,6 @@ app = new KajuAppContainer("/help")
     .helpMessage("show current list of commands.")
     .main(function (argument) {
 
-        // print = $.merge(print, Object.commands(installedApps));
-        let appsAndCategories = {};
-
         let homepageList = [];
         let systemList = [];
         let uselessList = [];
