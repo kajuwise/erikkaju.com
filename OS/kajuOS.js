@@ -219,30 +219,29 @@ function locateAndInstallApps() {
 
   $.ajax({
     url: "/apps",
-    success: function(data){
+    async: false,
+    success: function (data) {
       log(data);
       var locatedAppNames = $(data).find('a:contains(.kajuapp)');
-      nrFoundApps = locatedAppNames.length;
-      storeOutput(Actor.BIOS, "Located " + nrFoundApps + " apps", LINE_CLASS_APP_LOCATE);
+      storeOutput(Actor.BIOS, "Located " + locatedAppNames.length + " apps to install", LINE_CLASS_APP_LOCATE);
 
-      locatedAppNames.each(function(){
+      locatedAppNames.each(function () {
         // will loop through
-        var discoveredApp= $(this).attr("href");
+        var discoveredApp = $(this).attr("href");
         storeOutput(Actor.BIOS, "Installing " + discoveredApp, LINE_CLASS_APP_INSTALL, true);
         let appsRoot = "/apps/";
-        $.getScript( appsRoot + discoveredApp, function( data, textStatus, jqxhr ) {
-          Object.assign(installedApps, kajuApp);
-          Object.entries(installedApps).forEach(e => autoCompleteCommands.push(e[0]));
-        });
+        $.getScript(appsRoot + discoveredApp, function (data, textStatus, jqxhr) {
+          installedApps[app.getCommand()] = app;
+          autoCompleteCommands.push(app.getCommand());
+        })
       });
+      activateInputAutocomplete(autoCompleteCommands, autoCompleteConf);
     }
   });
-
-  activateInputAutocomplete(autoCompleteCommands, autoCompleteConf);
 }
 
 function activateInputAutocomplete(autocompleteCommands, autoCompleteConf) {
-    $('.console-input').tabcomplete(
+  $('.console-input').tabcomplete(
         autocompleteCommands,
         autoCompleteConf
     );
@@ -377,6 +376,7 @@ $('.console-input').on('keydown', function(event) {
 
     LAST_FULL_COMMAND_AND_DATA = pickLongestStringInArray([str, $('.hint').val()]);
     LAST_COMMAND_ONLY = pickLongestStringInArray([cmd, $('.hint').val()]);
+
     CommandMemory.validateAndSave(LAST_FULL_COMMAND_AND_DATA);
 
     logEvent('user_run_command', {full_command: LAST_FULL_COMMAND_AND_DATA});
@@ -386,16 +386,12 @@ $('.console-input').on('keydown', function(event) {
       return;
     }
 
-
-    if (typeof installedApps[LAST_COMMAND_ONLY] == 'function') {
-      if (installedApps[LAST_COMMAND_ONLY].length > 0) {
-        installedApps[LAST_COMMAND_ONLY](data);
-      } else {
-        installedApps[LAST_COMMAND_ONLY]();
-      }
+    if (installedApps[LAST_COMMAND_ONLY] instanceof KajuAppContainer) {
+      installedApps[LAST_COMMAND_ONLY].run(data);
     } else {
       output(["Command not found: '" + cmd + "'", "Use '/help' for list of commands."]);
     }
+
     $(this).val("");
   } else if (event.which === 38) {
     $(this).val(CommandMemory.getPrevious());
@@ -476,7 +472,7 @@ $(document).ready(function(){
   setTimeout(function(){
     removeLineByLineClass(LINE_CLASS_PROGRESSBAR);
     removeLineByLineClass(LINE_CLASS_APP_INSTALL);
-    storeOutput(Actor.BIOS, "Installed " + nrFoundApps + " .kajuapp(s)", LINE_CLASS_APP_LOCATE);
+    storeOutput(Actor.BIOS, "Installed " + Object.keys(installedApps).length + " .kajuapp(s)", LINE_CLASS_APP_LOCATE);
     removeLastLines(7);
     storeOutput(Actor.BIOS_INVISIBLE, "");
     $.get('https://www.cloudflare.com/cdn-cgi/trace', function(data) {
@@ -485,14 +481,14 @@ $(document).ready(function(){
         return obj[pair[0]] = pair[1], obj;
       }, {});
 
-      welcomeScreen(data.ip, data.uag, data.loc, data.colo) //todo not depend on CF uptime
+      welcomeScreen(data.ip, data.uag, data.loc, data.colo); //todo not depend on CF uptime
       showConsolePromptBox();
 
       saveCookie(Cookie.BEEN_HERE, "true");
       saveCookie(Cookie.LAST_IP, data.ip);
       saveCookie(Cookie.LAST_LOC, data.loc);
       saveCookie(Cookie.LAST_COLO, data.colo);
-      saveCookie(Cookie.LAST_DATETIME, new Date().toUTCString())
+      saveCookie(Cookie.LAST_DATETIME, new Date().toUTCString());
     }
     );
   }, latestTimeout + 200);
@@ -524,7 +520,7 @@ function tags(tags) {
 }
 
 function argHint(arguments) {
-  if (arguments.length == 0) return "";
+  if (arguments === undefined || arguments.length == 0) return "";
 
   let argumentHints = "<span class='argumentHint'>";
   for (const argument of arguments) {
@@ -556,4 +552,19 @@ function hideInputPlaceholder() {
 
 function restoreInputPlaceholder() {
   getConsoleInputElement().placeholder = "Type command...";
+}
+
+function ls() {
+  let out = [];
+  $.ajax({
+    url: "/apps",
+    async: false,
+    success: function (data) {
+      var locatedAppNames = $(data).find('a:contains(.kajuapp)');
+      locatedAppNames.each(function () {
+        out.push($(this).attr("href"));
+      });
+    }
+  });
+  return out;
 }
