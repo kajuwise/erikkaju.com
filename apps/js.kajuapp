@@ -1,5 +1,7 @@
-kajuApp = {
-    "/js": function(str) {
+app = new KajuAppContainer("/js")
+    .ofType(APP_TYPE.USELESS)
+    .helpMessage("run javascript commands.")
+    .main(function (str) {
         var print = [];
         print.push("Run javascript");
         try {
@@ -9,5 +11,4 @@ kajuApp = {
             print.push("Javascript code Error: " + err.message);
         }
         output(print);
-    }
-}
+    });

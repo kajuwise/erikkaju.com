@@ -1,5 +1,7 @@
-kajuApp = {
-    "/reboot": function () {
+app = new KajuAppContainer("/reboot")
+    .ofType(APP_TYPE.SYSTEM)
+    .helpMessage("see how system shuts down and wakes up again.")
+    .main(function (args) {
         storeOutput(Actor.SYSTEM, "Going to sleep!");
         hideConsolePromptBox();
 
@@ -22,5 +24,4 @@ kajuApp = {
         setTimeout(function () {
             showConsolePromptBox();
         }, 2000);
-    }
-}
+    });

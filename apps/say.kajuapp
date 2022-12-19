@@ -1,5 +1,7 @@
-kajuApp = {
-    "/say": function(a) {
-        output([a]);
-    }
-}
+app = new KajuAppContainer("/say")
+    .ofType(APP_TYPE.USELESS)
+    .helpMessage("let the machine say what you want.")
+    .main(function (args) {
+        output([args]);
+
+    });

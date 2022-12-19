@@ -1,9 +1,11 @@
-const ACCEPT = ['-accept', '-a', 'accept', 'a'];
-const CLEAR = ['-clear', '-c', 'clear', 'c'];
+app = new KajuAppContainer("/cookies")
+    .ofType(APP_TYPE.SYSTEM)
+    .helpMessage("manage cookies of this website.")
+    .main(function (argument) {
 
-kajuApp =
-    {
-        "/cookies": function (argument) {
+            const ACCEPT = ['-accept', '-a', 'accept', 'a'];
+            const CLEAR = ['-clear', '-c', 'clear', 'c'];
+
             argument = argument.toLowerCase();
             if (isNullOrWhitespace(argument)) {
                 output([document.cookie]);
@@ -20,10 +22,5 @@ kajuApp =
                     `To clear, use ${CLEAR.toString()}`,
                     `To view use just /cookies`])
             }
-        }
-        ,
-        "/cookies -accept": function() {},
-        "/cookies -clear": function() {}
-
-    }
+    });
 

@@ -1,6 +1,7 @@
-kajuApp = {
-    "/alert": function(a) {
-        alert(a);
+app = new KajuAppContainer("/alert")
+    .ofType(APP_TYPE.USELESS)
+    .helpMessage("trigger browser alert pop up with message.")
+    .main(function (args) {
+        alert(args);
         output([]);
-    }
-}
+    });

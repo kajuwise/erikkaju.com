@@ -1,5 +1,7 @@
-kajuApp = {
-    "/supermario": function () {
+app = new KajuAppContainer("/stack")
+    .ofType(APP_TYPE.USELESS)
+    .helpMessage("original Nintentdo game from 1985")
+    .main(function (args) {
         output([
             "            ___  ___       __   __                          ".replaceAll(" ", "&nbsp;"),
             "|\\ | | |\\ |  |  |__  |\\ | |  \\ /  \\                         ".replaceAll(" ", "&nbsp;"),
@@ -28,5 +30,4 @@ kajuApp = {
                 "              height='100%' width='100%'></iframe>");
         }, 500);
 
-    }
-}
+    });

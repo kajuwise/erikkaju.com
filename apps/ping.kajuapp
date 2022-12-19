@@ -1,9 +1,10 @@
 /* https://www.geeksforgeeks.org/how-to-ping-a-server-using-javascript/ */
-kajuApp = {
-    "/ping": function(a) {
+app = new KajuAppContainer("/ping")
+    .ofType(APP_TYPE.SYSTEM)
+    .helpMessage("check whether any network is present and if a host is attainable.")
+    .main(function (args) {
 
-// The custom URL entered by user
-        var URL = a;
+        var URL = args;
         var settings = {
 
             // Defines the configurations
@@ -38,5 +39,4 @@ kajuApp = {
         $.ajax(settings).done(function (response) {
             console.log(response);
         });
-    }
-}
+    });

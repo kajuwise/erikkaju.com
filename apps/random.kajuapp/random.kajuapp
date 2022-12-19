@@ -1,5 +1,5 @@
-kajuApp = {
-    "/random": function() {
+app = new KajuAppContainer("/random")
+    .main(function (args) {
         let images = [
             '3-Gustave-Courbet-Le-Desperere-1.jpeg',
             '4-Egon-Schiele-Self-Portrait-Wit.jpeg',
@@ -15,10 +15,11 @@ kajuApp = {
             'The-Two-Fridas-Frida-Kahlo-detai.jpeg'
         ]
 
-        let i = Math.floor(Math.random() * images.length);
-        let imagePath = '/apps/random.kajuapp/images/' + images.at(i);
-        console.log(i);
-        console.log(imagePath);
-        output([image(imagePath)])
-    }
-}
+        getRandomImage();
+
+        function getRandomImage() {
+            let i = Math.floor(Math.random() * images.length);
+            let imagePath = '/apps/random.kajuapp/images/' + images.at(i);
+            output([image(imagePath)])
+        }
+    });

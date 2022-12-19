@@ -1,5 +1,7 @@
-kajuApp = {
-    "/investments": function() {
+app = new KajuAppContainer("/investments")
+    .ofType(APP_TYPE.HOMEPAGE)
+    .helpMessage("my private equity investments.")
+    .main(function (args) {
 
         var print = [
             "Supplierplus",
@@ -13,5 +15,4 @@ kajuApp = {
         ];
 
         output(print);
-    }
-}
+    });

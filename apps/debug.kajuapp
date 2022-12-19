@@ -1,8 +1,10 @@
 const ON = 'on'
 const OFF = 'off'
 
-kajuApp = {
-    "/debug": function(onOff) {
+app = new KajuAppContainer("/debug")
+    .ofType(APP_TYPE.SYSTEM)
+    .helpMessage("toggle logging to browser console.")
+    .main(function (args) {
         onOff = onOff.toLowerCase();
         if (onOff == ON || onOff == '') {
             DEBUG = true;
@@ -18,5 +20,4 @@ kajuApp = {
             let msg = `Unsupported parameter: '${onOff}'. Use '${ON}' to enable debugging and '${OFF}' to disable.`;
             output([msg]);
         }
-    }
-}
+    });

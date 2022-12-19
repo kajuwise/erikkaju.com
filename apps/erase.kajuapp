@@ -1,6 +1,7 @@
-kajuApp = {
-    "/erase": function() {
+app = new KajuAppContainer("/erase")
+    .ofType(APP_TYPE.USELESS)
+    .helpMessage("erase last line.")
+    .main(function (args) {
         removeLastLines();
         clearHint();
-    }
-}
+    });

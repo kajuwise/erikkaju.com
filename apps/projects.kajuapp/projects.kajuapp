@@ -1,7 +1,6 @@
-var PATH_PROJECTS = "/projects";
-kajuApp = {
-    "/projects": function(argument) {
-
+app = new KajuAppContainer("/projects")
+    .main(function (argument) {
+        
         let ARG_VISA = ['-visa', '-v'];
         let ARG_STRIPE = ['-stripe', '-s'];
         let ARG_WISECARD = ['-wisecard'];
@@ -65,73 +64,73 @@ kajuApp = {
             `Some of memorable projects of past years`,
             "",
             `Professional:`,
-            new ClickableCommandListItem(PATH_PROJECTS, ARG_VISA)
+            new ClickableCommandListItem(this.command, ARG_VISA)
                 .setTitle('Visa Global Connect')
                 .setText('World’s first 100% cloud based payment card issuance. 2020')
                 .setTags(['visa', 'wise', 'banking', 'paymentcards'])
                 .build(),
-            new ClickableCommandListItem(PATH_PROJECTS, ARG_STRIPE)
+            new ClickableCommandListItem(this.command, ARG_STRIPE)
                 .setTitle('Stripe Delegated Auth')
                 .setText('World\'s first card issuer to replace traditional 3DS with delegated auth. 2022')
                 .setTags(['stripe', 'wise', 'security'])
                 .build(),
-            new ClickableCommandListItem(PATH_PROJECTS, ARG_WISECARD)
+            new ClickableCommandListItem(this.command, ARG_WISECARD)
                 .setTitle('Wise Card')
                 .setText('Millions of shiny green cards used by consumers and businesses around the world. 2017-2022')
                 .setTags(['wise', 'paymentcards'])
                 .build(),
-            new ClickableCommandListItem(PATH_PROJECTS, ARG_WP)
+            new ClickableCommandListItem(this.command, ARG_WP)
                 .setTitle('Wise Platform')
                 .setText('Revolutionary global financial APIs. Used by Google, Stripe, Deel, N26, Monzo, etc. 2021-2022')
                 .setTags(['wise', 'api', 'b2b'])
                 .build(),
             ``,
             `Personal:`,
-            new ClickableCommandListItem(PATH_PROJECTS, ARG_FFF)
+            new ClickableCommandListItem(this.command, ARG_FFF)
                 .setTitle('Fund Fellow Founders')
                 .setText('Community of 200 founders and tech executives angel investing. I’m first member and advisor. 2022')
                 .setTags(['vc', 'investing'])
                 .build(),
-            new ClickableCommandListItem(PATH_PROJECTS, ARG_EURO2)
+            new ClickableCommandListItem(this.command, ARG_EURO2)
                 .setTitle('Euro 2.0')
                 .setText('Stablecoin for central banks. 2016-2017')
                 .setTags(['opensource', 'cryptocurrency'])
                 .build(),
-            new ClickableCommandListItem(PATH_PROJECTS, ARG_ROLLERBOARD)
+            new ClickableCommandListItem(this.command, ARG_ROLLERBOARD)
                 .setTitle('Rollerboard')
                 .setText('Year-round big-air snowboard trainer for Estonian national team. 2018')
                 .setTags(['mechanicalengineering', 'sporttech'])
                 .build(),
 
-            new ClickableCommandListItem(PATH_PROJECTS, ARG_BOTMASTER)
+            new ClickableCommandListItem(this.command, ARG_BOTMASTER)
                 .setTitle('Botmaster')
                 .setText('C/C++ framework used by many award-winning competitive robots. 2011-2019')
                 .setTags(['robotics', 'opensource'])
                 .build(),
-            new ClickableCommandListItem(PATH_PROJECTS, ARG_NEVE)
+            new ClickableCommandListItem(this.command, ARG_NEVE)
                 .setTitle('Robot "Neve"')
                 .setText('Prize winning autonomous robot competing in robot soccer and basketball. 2012-2019')
                 .setTags(['robotics', 'opensource'])
                 .build(),
             "",
             `Hobby and race cars:`,
-            new ClickableCommandListItem(PATH_PROJECTS, ARG_G55)
+            new ClickableCommandListItem(this.command, ARG_G55)
                 .setTitle('Mercedes G55 AMG')
                 .setText('Modified 500HP G Wagon')
                 .build(),
-            new ClickableCommandListItem(PATH_PROJECTS, ARG_GOLF1987)
+            new ClickableCommandListItem(this.command, ARG_GOLF1987)
                 .setTitle('Golf Mk2 GTI 1987')
                 .setText('Time attack circuit race car.')
                 .build(),
-            new ClickableCommandListItem(PATH_PROJECTS, ARG_GOLF1990)
+            new ClickableCommandListItem(this.command, ARG_GOLF1990)
                 .setTitle('4x4 Golf Mk2 Turbo 1990')
                 .setText('Turbocharged all-wheel drive golf for (ice)track use.')
                 .build(),
-            new ClickableCommandListItem(PATH_PROJECTS, ARG_BMW2002)
+            new ClickableCommandListItem(this.command, ARG_BMW2002)
                 .setTitle('BMW 2002 Turbo 1971')
                 .setText('Iconic bimmer that turned BMW into a sporty car brand.')
                 .build(),
-            new ClickableCommandListItem(PATH_PROJECTS, ARG_SPRINTER)
+            new ClickableCommandListItem(this.command, ARG_SPRINTER)
                 .setTitle('Mercedes Sprinter')
                 .setText('4x4 Home on wheels.')
                 .build(),
@@ -139,5 +138,4 @@ kajuApp = {
         ];
 
         output(print);
-    }
-}
+    });

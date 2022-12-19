@@ -1,6 +1,7 @@
-kajuApp = {
-    "/clear": function() {
+app = new KajuAppContainer("/clear")
+    .ofType(APP_TYPE.USELESS)
+    .helpMessage("clear all lines.")
+    .main(function (args) {
         clearConsole();
         clearHint();
-    }
-}
+});
