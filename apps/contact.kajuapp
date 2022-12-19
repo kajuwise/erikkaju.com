@@ -1,5 +1,7 @@
-kajuApp = {
-    "/contact": function() {
+app = new KajuAppContainer("/contact")
+    .ofType(APP_TYPE.HOMEPAGE)
+    .helpMessage("see how to contact me.")
+    .main(function (args) {
 
         var print = [
             "Contact Me:",
@@ -10,5 +12,4 @@ kajuApp = {
         ];
 
         output(print);
-    }
-}
+    });
