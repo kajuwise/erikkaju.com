@@ -1,9 +1,53 @@
-kajuApp = {
-    "/help": function() {
+app = new KajuAppContainer("/help")
+    .ofType(APP_TYPE.SYSTEM)
+    .helpMessage("show current list of commands.")
+    .main(function (argument) {
 
-        var print = ["Commands:", ""];
-        print = $.merge(print, Object.keys(installedApps));
+        // print = $.merge(print, Object.commands(installedApps));
+        let appsAndCategories = {};
+
+        let homepageList = [];
+        let systemList = [];
+        let uselessList = [];
+
+
+        let commands = Object.keys(installedApps);
+        commands.sort();
+
+        commands.forEach(command => {
+            let app = installedApps[command];
+            if (app.getType() == APP_TYPE.HOMEPAGE) {
+                homepageList.push(app);
+            } else if (app.getType() == APP_TYPE.SYSTEM) {
+                systemList.push(app);
+            } else {
+                uselessList.push(app);
+            }
+        });
+
+        var print = ["", "Homepage commands:"];
+        for (const app of homepageList) {
+            print.push(new ClickableCommandListItem(app.getCommand())
+                .setTitle(app.getCommand())
+                .setText(app.getHelpMessage())
+                .build())
+        }
+
+        print = print.concat(["", "System commands:"])
+        for (const app of systemList) {
+            print.push(new ClickableCommandListItem(app.getCommand())
+                .setTitle(app.getCommand())
+                .setText(app.getHelpMessage())
+                .build())
+        }
+
+        print = print.concat(["", "and other useless commands:"])
+        for (const app of uselessList) {
+            print.push(new ClickableCommandListItem(app.getCommand())
+                .setTitle(app.getCommand())
+                .setText(app.getHelpMessage())
+                .build())
+        }
 
         output(print);
-    }
-}
+    });
