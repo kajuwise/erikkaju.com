@@ -1,10 +1,17 @@
-app = new KajuAppContainer("cd")
+app = new KajuAppContainer("cat")
     .ofType(APP_TYPE.SYSTEM)
     .helpMessage("standard Unix utility that reads files, writing them to standard output.")
     .main(function (args) {
         if (args != undefined && args.length > 0) {
             if (ls().includes(args)) {
-                output([`cd: not a directory: ${args}`]);
+
+
+                $.getScript('/apps/' + args, function (data, textStatus, jqxhr) {
+                    let formattedCode = preserveWhitespace(data);
+                    let separateLines = formattedCode.split(/\r?\n|\r|\n/g);
+                    output(separateLines);
+                })
+
                 return;
             }
             output([`cat: ${args}: No such file or directory`]);
