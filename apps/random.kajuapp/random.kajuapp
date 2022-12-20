@@ -1,4 +1,6 @@
 app = new KajuAppContainer("/random")
+    .ofType(APP_TYPE.HOMEPAGE)
+    .helpMessage("let the machine surprise you with something random.")
     .main(function (args) {
         let images = [
             '3-Gustave-Courbet-Le-Desperere-1.jpeg',

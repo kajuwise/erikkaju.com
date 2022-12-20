@@ -1,6 +1,6 @@
 app = new KajuAppContainer("/help")
     .ofType(APP_TYPE.SYSTEM)
-    .helpMessage("show current list of commands.")
+    .helpMessage("show this list of commands.")
     .main(function (argument) {
 
         let homepageList = [];
@@ -31,12 +31,21 @@ app = new KajuAppContainer("/help")
         }
 
         print = print.concat(["", "System commands:"])
+        let systemLines = [];
         for (const app of systemList) {
-            print.push(new ClickableCommandListItem(app.getCommand())
+            let item = new ClickableCommandListItem(app.getCommand())
                 .setTitle(app.getCommand())
                 .setText(app.getHelpMessage())
-                .build())
+                .build();
+
+            //make help first
+            if (app.getCommand() === this.command) {
+                systemLines.unshift(item)
+            } else {
+                systemLines.push(item)
+            }
         }
+        print = print.concat(systemLines);
 
         print = print.concat(["", "and other useless commands:"])
         for (const app of uselessList) {

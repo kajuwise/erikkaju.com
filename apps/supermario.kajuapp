@@ -1,4 +1,4 @@
-app = new KajuAppContainer("/stack")
+app = new KajuAppContainer("/supermario")
     .ofType(APP_TYPE.USELESS)
     .helpMessage("original Nintentdo game from 1985")
     .main(function (args) {

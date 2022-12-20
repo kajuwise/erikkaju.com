@@ -1,6 +1,6 @@
 app = new KajuAppContainer("/contact")
     .ofType(APP_TYPE.HOMEPAGE)
-    .helpMessage("see how to contact me.")
+    .helpMessage("get in touch.")
     .main(function (args) {
 
         var print = [

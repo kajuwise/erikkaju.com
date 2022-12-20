@@ -1,4 +1,6 @@
 app = new KajuAppContainer("/projects")
+    .ofType(APP_TYPE.HOMEPAGE)
+    .helpMessage("some of my professional and personal projects.")
     .main(function (argument) {
         
         let ARG_VISA = ['-visa', '-v'];
