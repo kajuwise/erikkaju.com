@@ -320,18 +320,22 @@ function welcomeScreen(userIp, userAgent, location, city) {
     userAgent,
     "",
     lastLogin,
-    "            _ _    _          _                            ".replaceAll(" ", "&nbsp;"),
-    "   ___ _ __(_) | _| | ____ _ (_)_   _   ___ ___  _ __ ___  ".replaceAll(" ", "&nbsp;"),
-    "  / _ \\ '__| | |/ / |/ / _` || | | | | / __/ _ \\| '_ ` _ \\ ".replaceAll(" ", "&nbsp;"),
-    " |  __/ |  | |   <|   < (_| || | |_| || (_| (_) | | | | | |".replaceAll(" ", "&nbsp;"),
-    "  \\___|_|  |_|_|\\_\\_|\\_\\__,_|/ |\\__,_(_)___\\___/|_| |_| |_|".replaceAll(" ", "&nbsp;"),
-    "                           |__/                            ".replaceAll(" ", "&nbsp;"),
+    preserveWhitespace("            _ _    _          _                            "),
+    preserveWhitespace("   ___ _ __(_) | _| | ____ _ (_)_   _   ___ ___  _ __ ___  "),
+    preserveWhitespace("  / _ \\ '__| | |/ / |/ / _` || | | | | / __/ _ \\| '_ ` _ \\ "),
+    preserveWhitespace(" |  __/ |  | |   <|   < (_| || | |_| || (_| (_) | | | | | |"),
+    preserveWhitespace("  \\___|_|  |_|_|\\_\\_|\\_\\__,_|/ |\\__,_(_)___\\___/|_| |_| |_|"),
+    preserveWhitespace("                           |__/                            "),
     "",
     "Use '/help' for list of commands.",
     ""
   ];
 
   output(welcome, true);
+}
+
+function preserveWhitespace(value) {
+  return value.replaceAll(" ", "&nbsp;");
 }
 
 function getCurrentYear() {
