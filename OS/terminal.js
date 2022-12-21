@@ -27,3 +27,18 @@ class ClickableCommandListItem {
         return `• ${clickableCommand(this.title, command )} ${this.text}${tags(this.tags)} ${argHint(this.arguments)}`;
     }
 }
+
+function splitTextIntoLinesList(formattedCode) {
+    return formattedCode.split(/\r?\n|\r|\n/g);
+}
+
+function preserveWhitespaceForLines(valueLines) {
+    valueLines.forEach((line, i) => {
+        valueLines[i] = preserveWhitespaceForLine(line)
+    });
+    return valueLines;
+}
+
+function preserveWhitespaceForLine(singleValue) {
+    return singleValue.replaceAll(" ", "&nbsp;");
+}

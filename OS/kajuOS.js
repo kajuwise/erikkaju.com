@@ -320,22 +320,18 @@ function welcomeScreen(userIp, userAgent, location, city) {
     userAgent,
     "",
     lastLogin,
-    preserveWhitespace("            _ _    _          _                            "),
-    preserveWhitespace("   ___ _ __(_) | _| | ____ _ (_)_   _   ___ ___  _ __ ___  "),
-    preserveWhitespace("  / _ \\ '__| | |/ / |/ / _` || | | | | / __/ _ \\| '_ ` _ \\ "),
-    preserveWhitespace(" |  __/ |  | |   <|   < (_| || | |_| || (_| (_) | | | | | |"),
-    preserveWhitespace("  \\___|_|  |_|_|\\_\\_|\\_\\__,_|/ |\\__,_(_)___\\___/|_| |_| |_|"),
-    preserveWhitespace("                           |__/                            "),
+    preserveWhitespaceForLine("            _ _    _          _                            "),
+    preserveWhitespaceForLine("   ___ _ __(_) | _| | ____ _ (_)_   _   ___ ___  _ __ ___  "),
+    preserveWhitespaceForLine("  / _ \\ '__| | |/ / |/ / _` || | | | | / __/ _ \\| '_ ` _ \\ "),
+    preserveWhitespaceForLine(" |  __/ |  | |   <|   < (_| || | |_| || (_| (_) | | | | | |"),
+    preserveWhitespaceForLine("  \\___|_|  |_|_|\\_\\_|\\_\\__,_|/ |\\__,_(_)___\\___/|_| |_| |_|"),
+    preserveWhitespaceForLine("                           |__/                            "),
     "",
     "Use '/help' for list of commands.",
     ""
   ];
 
   output(welcome, true);
-}
-
-function preserveWhitespace(value) {
-  return value.replaceAll(" ", "&nbsp;");
 }
 
 function getCurrentYear() {

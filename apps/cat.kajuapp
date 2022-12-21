@@ -7,8 +7,8 @@ app = new KajuAppContainer("cat")
 
 
                 $.getScript('/apps/' + args, function (data, textStatus, jqxhr) {
-                    let formattedCode = preserveWhitespace(data);
-                    let separateLines = formattedCode.split(/\r?\n|\r|\n/g);
+                    let formattedCode = preserveWhitespaceForLine(data);
+                    let separateLines = splitTextIntoLinesList(formattedCode);
                     output(separateLines);
                 })
 
