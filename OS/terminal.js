@@ -24,7 +24,7 @@ class ClickableCommandListItem {
         if (this.arguments != undefined && this.arguments.length > 0) {
             command += (' ' + this.arguments.at(0));
         }
-        return `• ${clickableCommand(this.title, command )} ${this.text}${tags(this.tags)} ${argHint(this.arguments)}`;
+        return `• ${clickableCommandRun(this.title, command )} ${this.text}${tags(this.tags)} ${argHint(this.arguments)}`;
     }
 }
 

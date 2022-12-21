@@ -3,6 +3,21 @@ app = new KajuAppContainer("/about")
     .helpMessage("what is this place.")
     .main(function (args) {
 
+        let ARG_ALL = ['-a'];
+
+        console.log(args)
+        if (ARG_ALL.includes(args)) {
+            let aboutThisWeb =
+                `I was setting up my new machine recently and decided to code something in my fresh IDE setup. A personal homepage. 
+                Thought it would be fun to imitate a retro style terminal where visitors would interact through commandline commands.   
+                Every command here is a terminal style application that is installed dynamically upon every boot (page load).${newLine}
+                User can even install their own custom apps. Go figure it out. 
+                Hint: run ${clickableCommandRun('ls', 'ls')} to see contents of /apps directory and ${clickableCommandEnter('cat', 'cat ')} to view the source code of existing apps. 
+                `
+                output(splitTextIntoLinesList(aboutThisWeb));
+            return;
+        }
+
         let hello =
 `
  ,dPYb,              ,dPYb, ,dPYb,             
@@ -21,8 +36,8 @@ app = new KajuAppContainer("/about")
             Welcome to my commandline website. Thanks for running this command ;)${newLine}
             I have studied software engineering, hardware design and diplomacy - doing a bit of all.${newLine}
             On this website, you can see my projects, public talks, blog posts, etc. Or just play around with different commands.${newLine} 
-            Use ${clickableCommand(this.command + ' -a', this.command + ' -a')} to learn more about this site.            
-        `
+            Use ${clickableCommandRun(this.command + ARG_ALL, this.command + ' -a')} to learn more about this site.            
+        `;
 
         output([...preserveWhitespaceForLines(splitTextIntoLinesList(hello)), ...splitTextIntoLinesList(welcome)]);
     });
