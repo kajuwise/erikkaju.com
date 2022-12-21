@@ -501,10 +501,18 @@ function highlight(string) {
   return highlightedString + "</span>";
 }
 
-function clickableCommand(string, command) {
-  let highlightedString = "<a href='javascript: simulateCommand(`" + command + "`)' class='highlight'>";
-  highlightedString += string;
-  return highlightedString + `</a>`;
+function clickableCommandRun(string, command) {
+  return aLinkWithOnClickJs(string, "simulateCommand(`" + command + "`, true)", "highlight");
+}
+
+function clickableCommandEnter(string, command) {
+  return aLinkWithOnClickJs(string, "simulateCommand(`" + command + "`, false)", "highlight");
+}
+
+function aLinkWithOnClickJs(value, command, htmlClass) {
+  let linkHtml = "<a href='javascript: " + command + "' class='" + htmlClass + "'>";
+  linkHtml += value;
+  return linkHtml + `</a>`;
 }
 
 function tags(tags) {
@@ -531,19 +539,26 @@ function argHint(arguments) {
   return argumentHints;
 }
 
-function simulateCommand(command) {
+function simulateCommand(command, run) {
     hideInputPlaceholder();
     getConsoleInputElement().style.display = "none";
-    getConsoleInputElement().value = command;
-    getConsoleInputElement().style = "opacity: 1; color: black; background-color: #00ff00";
-    getConsoleInputElement().animate({opacity: 0}, 450)
+    enterCommand(command);
+  getConsoleInputElement().style = "opacity: 1; color: black; background-color: #00ff00";
+    getConsoleInputElement().animate({ opacity: 0 }, 450)
+
 
   setTimeout(function(){
-    const keyboardEvent = new KeyboardEvent('keydown', { bubbles: true, cancelable: true, keyCode: 13 });
-    getConsoleInputElement().dispatchEvent(keyboardEvent);
+    if (run == true) {
+      const keyboardEvent = new KeyboardEvent('keydown', {bubbles: true, cancelable: true, keyCode: 13});
+      getConsoleInputElement().dispatchEvent(keyboardEvent);
+    }
     getConsoleInputElement().style = "";
     restoreInputPlaceholder();
   }, 400);
+}
+
+function enterCommand(command) {
+  getConsoleInputElement().value = command;
 }
 
 function hideInputPlaceholder() {
