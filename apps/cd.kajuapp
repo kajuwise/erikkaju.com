@@ -1,4 +1,6 @@
 app = new KajuAppContainer("cd")
+    .ofType(APP_TYPE.SYSTEM)
+    .helpMessage("command used to change the current working directory.")
     .main(function (args) {
         if (args != undefined && args.length > 0) {
             if (ls().includes(args)) {
