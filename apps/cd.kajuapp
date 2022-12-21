@@ -4,6 +4,9 @@ app = new KajuAppContainer("cd")
             if (ls().includes(args)) {
                 output([`cd: not a directory: ${args}`])
                 return;
+            } else if (['..'].includes(args)) {
+                output([`cd: ${args}: permission denied.`])
+                return;
             }
             output([`cd: no such file or directory: ${args}`])
         } else {
