@@ -32,8 +32,8 @@ app = new KajuAppContainer("/about")
  `
 
         let welcome =
-            `Hello, I'm ${highlight('Erik Kaju')}. Technologist, product creator, organization builder and tech executive. 
-            Welcome to my commandline website. Thanks for running this command ;)${newLine}
+            `Hello, I'm ${highlight('Erik Kaju')}. Welcome to my commandline website. Thanks for running this command ;) 
+            I am technologist, product creator, organization builder, tech executive and engineer.${newLine}
             I have studied software engineering, hardware design and diplomacy - doing a bit of all.${newLine}
             On this website, you can see my projects, public talks, blog posts, etc. Or just play around with different commands.${newLine} 
             Use ${clickableCommandRun(this.command + ARG_ALL, this.command + ' -a')} to learn more about this site.            
