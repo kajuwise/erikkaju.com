@@ -11,7 +11,9 @@ app = new KajuAppContainer("/investments")
             "Wisedrive",
             "Printify",
             "DriveX",
-            ""
+            "Katana MRP",
+            "Salu Health",
+            "Align"
         ];
 
         output(print);
