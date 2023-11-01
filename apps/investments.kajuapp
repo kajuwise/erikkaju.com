@@ -13,7 +13,9 @@ app = new KajuAppContainer("/investments")
             "DriveX",
             "Katana MRP",
             "Salu Health",
-            "Align"
+            "Align", 
+            "Salv", 
+            "Inbank"
         ];
 
         output(print);
