@@ -444,7 +444,7 @@ $(document).ready(function(){
   storeOutput(Actor.BIOS, '0%', LINE_CLASS_PROGRESSBAR);
   locateAndInstallApps();
   installAnalyticsDriver().then((value) => {
-    storeOutput(Actor.BIOS, "Installed analytics driver");
+    storeOutput(Actor.BIOS, "Loading analytics driver");
   });
 
   for (let l = 0; l < 102; l++) {
@@ -472,7 +472,7 @@ $(document).ready(function(){
   setTimeout(function(){
     removeLineByLineClass(LINE_CLASS_PROGRESSBAR);
     removeLineByLineClass(LINE_CLASS_APP_INSTALL);
-    storeOutput(Actor.BIOS, "Installed " + Object.keys(installedApps).length + " .kajuapp(s)", LINE_CLASS_APP_LOCATE);
+    storeOutput(Actor.BIOS, "Found " + Object.keys(installedApps).length + " .kajuapp(s)", LINE_CLASS_APP_LOCATE);
     removeLastLines(7);
     storeOutput(Actor.BIOS_INVISIBLE, "");
     $.get('https://www.cloudflare.com/cdn-cgi/trace', function(data) {
