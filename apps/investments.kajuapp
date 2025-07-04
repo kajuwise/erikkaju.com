@@ -4,19 +4,20 @@ app = new KajuAppContainer("/investments")
     .main(function (args) {
 
         var print = [
-            "SpaceX.com - reusable rockets, satellite Internet and space exploration.",            
-            "Bolt.eu - ride-hailing, micromobility, food delivery and carsharing services.", 
-            "Apata.io - online payment security (ACS) solution of choice for top processors like Wise, Nubank, Thredd, Paymentology and others.",
-            "Salv.com - fincrime prevention platform with intelligence sharing built-in.", 
-            "Printify - create and sell beautiful custom-products in minutes.",
-            "KatanaMRP.com",
-            "Salu.md",
-            "Supplierplus",
-            "DriveX",
+            "SpaceX.com - Reusable rockets, satellite Internet and space exploration.",
+            "Bolt.eu - Ride-hailing, micromobility, food delivery and carsharing services.",
+            "Apata.io - Online payment security (ACS) solution of choice for processors like Wise, Nubank, Thredd, Paymentology and others.",
+            "Salv.com - Fincrime prevention platform with intelligence sharing built-in.",
+            "Printify - Create and sell beautiful custom-products in minutes.",
+            "KatanaMRP.com - Simplify your inventory and scale your business.",
+            "Salu.md - Digital-first healthcare provider, available 7 days a week for online and in-person care from general doctors, specialists, and more.",
+            "Supplierplus.com - Supply Chain Finance platform that releases cash from unpaid invoices.",
+            "DriveX.io - Eliminating dishonesty and waste in the car repair industry through AI car inspection.",
             "Change Invest",
             "Wisedrive",
-            "Align", 
-            "Inbank"
+            "GetAlign.com - AI agent for product demos",
+            "Inbank.eu - The embedded financing platform elevating sales for thousands of merchants.",
+            "ObsidianOS.com - Private Wealth, Made Personal."
         ];
 
         output(print);
